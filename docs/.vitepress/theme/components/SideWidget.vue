@@ -36,7 +36,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import WidgetPage1 from './WidgetPage1.vue'
-import WidgetPage2 from './WidgetPage2.vue'
 
 const isExpanded = ref(false)
 const currentPage = ref(0)
@@ -44,7 +43,6 @@ const currentPage = ref(0)
 // Pages to display in the widget
 const pages = [
   WidgetPage1,
-  WidgetPage2
 ]
 
 const toggleExpand = () => {
