@@ -21,12 +21,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 确保获取完整历史
       
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18  # 更新到新版本的Node
           cache: 'npm'
+      
+      - name: List workspace
+        run: |
+          echo "列出主要目录结构："
+          ls -la
+          echo "列出组件目录内容："
+          ls -la docs/.vitepress/theme/components/ || echo "目录不存在"
       
       - name: Install dependencies
         run: npm ci
@@ -35,7 +44,7 @@ jobs:
         run: npm run build
       
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2  # 更新到 v2 版本
         with:
           path: docs/.vitepress/dist
 
