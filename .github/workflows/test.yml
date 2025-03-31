@@ -1,0 +1,42 @@
+name: Test Build
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Test build
+        run: npm run build
+      
+      - name: Check for broken internal links
+        run: node scripts/check-links.js
+      
+      - name: Run local server for external link check
+        run: |
+          npm run serve &
+          sleep 5
+          
+          # 安装链接检查工具
+          npm install -g broken-link-checker
+          
+          # 检查外部链接，忽略github.com
+          blc http://localhost:4173 -ro --exclude github.com --filter-level 2
+          
+          # 关闭服务器
+          kill $(lsof -t -i:4173) || true 

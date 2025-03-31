@@ -1,0 +1,298 @@
+/**
+ * Customize default theme styling by overriding CSS variables
+ */
+
+:root {
+  --vp-c-default-1: var(--vp-c-gray-1);
+  --vp-c-default-2: var(--vp-c-gray-2);
+  --vp-c-default-3: var(--vp-c-gray-3);
+  --vp-c-default-soft: var(--vp-c-gray-soft);
+
+  --vp-c-brand-1: var(--vp-c-indigo-1);
+  --vp-c-brand-2: var(--vp-c-indigo-2);
+  --vp-c-brand-3: var(--vp-c-indigo-3);
+  --vp-c-brand-soft: var(--vp-c-indigo-soft);
+
+  --vp-c-tip-1: var(--vp-c-brand-1);
+  --vp-c-tip-2: var(--vp-c-brand-2);
+  --vp-c-tip-3: var(--vp-c-brand-3);
+  --vp-c-tip-soft: var(--vp-c-brand-soft);
+
+  --vp-c-warning-1: var(--vp-c-yellow-1);
+  --vp-c-warning-2: var(--vp-c-yellow-2);
+  --vp-c-warning-3: var(--vp-c-yellow-3);
+  --vp-c-warning-soft: var(--vp-c-yellow-soft);
+
+  --vp-c-danger-1: var(--vp-c-red-1);
+  --vp-c-danger-2: var(--vp-c-red-2);
+  --vp-c-danger-3: var(--vp-c-red-3);
+  --vp-c-danger-soft: var(--vp-c-red-soft);
+
+  --vp-font-family-base: "SF Pro SC", "SF Pro Text", "SF Pro Icons",
+    "PingFang SC", "Helvetica Neue", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Helvetica, Arial, sans-serif;
+  --vp-font-family-mono: "Sauce Code Pro", "Source Code Pro", "Courier New",
+    monospace;
+
+  --vp-c-text-strong: rgb(63 86 99);
+  --vp-c-text-em: rgb(91, 4, 17);
+}
+
+.dark {
+  --vp-c-text-strong: rgb(138, 183, 209);
+  --vp-c-text-em: rgb(187, 121, 131);
+}
+
+body {
+  font-size: 16px;
+}
+
+/* Logo and home link optimization */
+.VPNavBarTitle .title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.VPNavBarTitle .logo {
+  height: 40px; /* Larger logo */
+  width: auto;
+  margin-right: 8px;
+}
+
+/**
+ * Component: Button
+ */
+
+:root {
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand-3);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-bg: var(--vp-c-brand-1);
+}
+
+/**
+ * Component: Home
+ */
+
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    #bd34fe 30%,
+    #41d1ff
+  );
+
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    #bd34fe 50%,
+    #47caff 50%
+  );
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+
+/**
+ * Component: Custom Block
+ */
+
+:root {
+  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-text: var(--vp-c-text-1);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+}
+
+/**
+ * Component: Algolia
+ */
+
+.DocSearch {
+  --docsearch-primary-color: var(--vp-c-brand-1) !important;
+}
+
+/* Simplified color scheme with fewer colored elements */
+.vp-doc {
+  p img,
+  p video {
+    margin: 0 auto;
+    align-self: center;
+  }
+
+  blockquote > p {
+    font-size: 16px;
+  }
+
+  .custom-block {
+    font-size: 16px;
+  }
+
+  /* Only color strong elements in headers and important content */
+  h1 strong, h2 strong, h3 strong, 
+  .important strong {
+    color: var(--vp-c-text-strong);
+    font-weight: bold;
+  }
+
+  /* Regular strong text should be bold but not colored */
+  strong, b {
+    font-weight: bold;
+  }
+
+  /* Only color emphasis in headers and important sections */
+  h1 em, h2 em, h3 em,
+  .important em {
+    color: var(--vp-c-text-em);
+  }
+
+  /* Regular emphasis should be italic but not colored */
+  em, i {
+    font-style: italic;
+  }
+
+  svg {
+    font-family: var(--vp-font-family-mono);
+  }
+
+  mjx-container {
+    display: inline-block;
+    margin: auto 1px -4px;
+  }
+
+  sup {
+    vertical-align: top;
+    position: relative;
+    top: -0.5em;
+  }
+
+  code {
+    font-family: "SauceCodePro Nerd Font Mono", "CharisSIL", "DejaVu Sans Mono",
+      "Courier New", monospace;
+  }
+
+  span.pho {
+    border-radius: 4px;
+    padding: 1px 4px;
+    background-color: var(--vp-code-bg);
+    transition: color 0.25s, background-color 0.5s;
+    font-family: "CharisSIL", "DejaVu Sans Mono", "Courier New", monospace;
+    font-size: var(--vp-code-font-size);
+    color: var(--vp-code-color);
+  }
+  
+  span.pho.alt::before,
+  span.pho.alt::after {
+    content: "/";
+    display: inline-block;
+    width: 0.5em;
+  }
+}
+
+/* Add more white space for better readability */
+.vp-doc h2 {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc p {
+  margin: 1.25em 0;
+  line-height: 1.7;
+}
+
+/* Add more spacing between sections */
+.vp-doc > section {
+  margin-bottom: 3rem;
+}
+
+audio {
+  padding-left: 1em;
+  height: 1.8em;
+  margin-top: -0.2em;
+}
+
+video,
+img {
+  width: 95%;
+}
+
+span.not-display {
+  display: none;
+}
+
+.two-column ol,
+.two-column ul {
+  column-count: 2;
+  column-gap: 2em;
+}
+
+/* Carousel styling - simplified version */
+.carousel swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel swiper-container::part(button-prev),
+.carousel swiper-container::part(button-next) {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 0.5rem;
+  border-radius: 4px;
+  transform: scale(0.8);
+}
+
+.carousel swiper-container::part(button-prev) {
+  left: 0;
+  margin-left: -6px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.carousel swiper-container::part(button-next) {
+  right: 0;
+  margin-right: -6px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.carousel swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel .carousel-inner swiper-slide {
+  align-self: center;
+}
+
+.carousel .swiper-thumb {
+  padding: 10px 0;
+}
+
+.carousel .swiper-thumb swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.carousel .swiper-thumb .swiper-slide-thumb-active {
+  opacity: 1;
+} 
