@@ -2,9 +2,10 @@ name: Deploy VitePress site to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
+# 设置权限
 permissions:
   contents: read
   pages: write
@@ -39,6 +40,7 @@ jobs:
           path: docs/.vitepress/dist
 
   deploy:
+    # 标准的 GitHub Pages 环境
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
