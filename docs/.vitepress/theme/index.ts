@@ -4,13 +4,16 @@ import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import './styles/font.css'
 import './styles/custom.css'
+import SideWidget from './components/SideWidget.vue'
+import Layout from './Layout.vue'
 
 export default {
   ...DefaultTheme,
+  Layout,
   // enhance the theme with custom components if needed
   enhanceApp({ app, router, siteData }) {
     // Register custom global components if needed
-    // app.component('MyComponent', defineAsyncComponent(() => import('./components/MyComponent.vue')))
+    app.component('SideWidget', SideWidget)
     
     // Setup a global variable to track theme changes, which is useful for dynamic theme-aware components
     if (typeof window !== 'undefined') {
