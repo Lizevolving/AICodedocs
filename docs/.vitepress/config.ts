@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.vuejs.org/config/app-configs
 export default defineConfig({
+  base: '/AICodeDocs/',  // 替换为你的仓库名
   title: '技术文档库',
   description: '系统架构与设计模式的技术文档',
   lang: 'zh-CN',
