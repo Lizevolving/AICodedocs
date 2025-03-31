@@ -20,14 +20,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0  # 确保获取完整历史
       
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18  # 更新到新版本的Node
+          node-version: 18
           cache: 'npm'
       
       - name: List workspace
@@ -37,6 +37,13 @@ jobs:
           echo "列出组件目录内容："
           ls -la docs/.vitepress/theme/components/ || echo "目录不存在"
       
+      - name: Audit dependencies
+        run: |
+          echo "检查依赖安全性..."
+          npm audit --production || echo "Found vulnerabilities but continuing..."
+          echo "检查过时包..."
+          npm outdated || echo "Found outdated packages but continuing..."
+      
       - name: Install dependencies
         run: npm ci
       
@@ -44,7 +51,7 @@ jobs:
         run: npm run build
       
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # 更新到 v2 版本
+        uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
 
@@ -58,4 +65,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2 
+        uses: actions/deploy-pages@v4 
