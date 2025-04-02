@@ -1,0 +1,61 @@
+name: Test Build
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 确保获取完整历史
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: List components directory
+        run: |
+          echo "列出组件目录内容："
+          ls -la docs/.vitepress/theme/components/
+      
+      - name: Audit dependencies
+        run: |
+          echo "检查依赖安全性..."
+          npm audit --production || echo "Found vulnerabilities but continuing..."
+          echo "检查过时包..."
+          npm outdated || echo "Found outdated packages but continuing..."
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Test build
+        run: npm run build
+      
+      - name: Check for broken internal links
+        run: |
+          echo "检查内部链接..."
+          node scripts/check-links.js || echo "Found broken internal links but continuing..."
+        continue-on-error: true
+      
+      - name: Check for broken external links
+        run: |
+          echo "启动本地服务器..."
+          npm run serve &
+          sleep 5
+          
+          echo "安装链接检查工具..."
+          npm install -g linkinator
+          
+          echo "检查外部链接..."
+          linkinator http://localhost:4173 --recurse --skip github.com --timeout 10000 || echo "Found broken external links but continuing..."
+          
+          echo "关闭服务器..."
+          kill $(lsof -t -i:4173) || true
+        continue-on-error: true 

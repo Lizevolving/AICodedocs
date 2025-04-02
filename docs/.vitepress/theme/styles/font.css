@@ -1,0 +1,50 @@
+/* Font definitions for improved readability */
+
+/* Import system and Google fonts for better cross-platform support */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Main text font for better readability */
+:root {
+  --font-family-base: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+    Roboto, Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
+  --font-family-mono: 'Source Code Pro', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+/* Apply font to body */
+body {
+  font-family: var(--font-family-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Code blocks */
+pre, code {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+}
+
+/* Headings with slightly tighter line height */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+/* Better spacing for paragraphs */
+p {
+  margin-bottom: 1.2em;
+}
+
+/* You can define font face declarations here if using custom fonts */
+/*
+@font-face {
+  font-family: 'SF Pro SC';
+  src: url('/fonts/SF-Pro-SC.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+*/ 
