@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <style>
+    .gear {
+      animation: rotate 8s linear infinite;
+      transform-origin: center;
+    }
+    .inner-gear {
+      animation: rotate-reverse 6s linear infinite;
+      transform-origin: center;
+    }
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes rotate-reverse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+  </style>
+  
+  <!-- 外齿轮 -->
+  <path class="gear" fill="url(#gear-gradient)" d="M60,20a40,40 0 1,1 0,80a40,40 0 0,1 0,-80zm0,10a30,30 0 1,0 0,60a30,30 0 0,0 0,-60z"/>
+  
+  <!-- 内齿轮 -->
+  <path class="inner-gear" fill="url(#inner-gradient)" d="M60,40a20,20 0 1,1 0,40a20,20 0 0,1 0,-40zm0,10a10,10 0 1,0 0,20a10,10 0 0,0 0,-20z"/>
+  
+  <!-- 渐变定义 -->
+  <defs>
+    <linearGradient id="gear-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#41D1FF" />
+      <stop offset="100%" stop-color="#764ABC" />
+    </linearGradient>
+    <linearGradient id="inner-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BD34FE" />
+      <stop offset="100%" stop-color="#41D1FF" />
+    </linearGradient>
+  </defs>
+</svg>

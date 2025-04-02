@@ -60,6 +60,21 @@ jobs:
         with:
           path: docs/.vitepress/dist
 
+      - name: Fix resource paths
+        run: |
+          echo "修复资源路径..."
+          mkdir -p docs/.vitepress/dist/AICodeDocs/assets
+          cp -r docs/.vitepress/dist/assets/* docs/.vitepress/dist/AICodeDocs/assets/ || true
+          touch docs/.vitepress/dist/.nojekyll
+
+      - name: Validate build output
+        run: |
+          echo "检查构建输出的资源路径..."
+          if grep -q 'src="/' docs/.vitepress/dist/index.html; then
+            echo "警告: 检测到绝对路径引用，可能导致在 GitHub Pages 上无法加载资源"
+            grep -n 'src="/' docs/.vitepress/dist/index.html
+          fi
+
   deploy:
     # 标准的 GitHub Pages 环境
     environment:
