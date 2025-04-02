@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "serve": "vitepress serve docs",
+    "serve": "vitepress serve docs --base=/AICodeDocs/",
     "check-links": "node scripts/check-links.js",
     "test": "npm run check-links",
+    "check:paths": "grep -r 'src=\"/assets/' docs/.vitepress/dist || echo '✅ 路径检查通过'",
     "preview": "npm run build && npm run serve"
   },
   "devDependencies": {
