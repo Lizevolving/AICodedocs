@@ -50,6 +50,11 @@ jobs:
       - name: Build
         run: npm run build
       
+      # 在 deploy.yml 中，可以添加：
+      - name: Create .nojekyll file
+        run: touch docs/.vitepress/dist/.nojekyll
+        # 确保在 Build 步骤之后，Upload artifact 步骤之前
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
