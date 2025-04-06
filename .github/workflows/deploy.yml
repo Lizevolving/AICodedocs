@@ -49,31 +49,39 @@ jobs:
       
       - name: Build
         run: npm run build
+        env:
+          # 确保构建时使用正确的基础路径
+          BASE_URL: /AICodeDocs/
       
-      # 在 deploy.yml 中，可以添加：
+      # 确保.nojekyll文件存在，防止GitHub Pages误将站点当作Jekyll站点
       - name: Create .nojekyll file
         run: touch docs/.vitepress/dist/.nojekyll
-        # 确保在 Build 步骤之后，Upload artifact 步骤之前
+      
+      # 修复资源路径问题
+      - name: Fix asset paths
+        run: |
+          echo "检查和修复资源路径问题..."
+          
+          # 检查是否有绝对路径引用
+          if grep -q 'src="/' docs/.vitepress/dist/index.html; then
+            echo "发现绝对路径引用，进行修复..."
+            
+            # 替换HTML文件中的资源路径
+            find docs/.vitepress/dist -name "*.html" -exec sed -i 's|src="/assets/|src="/AICodeDocs/assets/|g' {} \;
+            find docs/.vitepress/dist -name "*.html" -exec sed -i 's|href="/assets/|href="/AICodeDocs/assets/|g' {} \;
+            
+            # 替换JS文件中的资源路径
+            find docs/.vitepress/dist/assets -name "*.js" -exec sed -i 's|"/assets/|"/AICodeDocs/assets/|g' {} \;
+          fi
+          
+          # 验证修复结果
+          echo "验证修复结果..."
+          grep -r 'src="/assets/' docs/.vitepress/dist || echo "✅ 所有资源路径已修复"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
-
-      - name: Fix resource paths
-        run: |
-          echo "修复资源路径..."
-          mkdir -p docs/.vitepress/dist/AICodeDocs/assets
-          cp -r docs/.vitepress/dist/assets/* docs/.vitepress/dist/AICodeDocs/assets/ || true
-          touch docs/.vitepress/dist/.nojekyll
-
-      - name: Validate build output
-        run: |
-          echo "检查构建输出的资源路径..."
-          if grep -q 'src="/' docs/.vitepress/dist/index.html; then
-            echo "警告: 检测到绝对路径引用，可能导致在 GitHub Pages 上无法加载资源"
-            grep -n 'src="/' docs/.vitepress/dist/index.html
-          fi
 
   deploy:
     # 标准的 GitHub Pages 环境

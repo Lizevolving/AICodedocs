@@ -12,8 +12,8 @@
     "preview": "npm run build && npm run serve"
   },
   "devDependencies": {
-    "vue": "3.2.44",
-    "vitepress": "1.0.0-alpha.28"
+    "vue": "^3.3.4",
+    "vitepress": "^1.0.0"
   },
   "pnpm": {
     "peerDependencyRules": {

@@ -32,6 +32,19 @@ export default {
       
       // Initialize the value
       app.config.globalProperties.$isDark = htmlElement.classList.contains('dark')
+      
+      // 确保所有资源引用使用正确的基础路径
+      const base = siteData.base || '/AICodeDocs/'
+      app.config.globalProperties.$withBase = (path) => {
+        // 如果路径为空或已经是完整URL，则直接返回
+        if (!path || /^(https?:)?\/\//.test(path)) {
+          return path
+        }
+        // 确保base以/结尾，path不以/开头
+        const normalizedBase = base.endsWith('/') ? base : `${base}/`
+        const normalizedPath = path.startsWith('/') ? path.slice(1) : path
+        return `${normalizedBase}${normalizedPath}`
+      }
     }
     
     // Add any additional theme enhancements here
